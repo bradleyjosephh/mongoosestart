@@ -1,4 +1,5 @@
-const Cat = require('./Cat.js')
-const Bird = require('./Bird.js')
-
-module.exports = { Cat, Bird}
+module.exports = {
+    Cat: require('./Cat.js'),
+    Bird: require('./Bird.js'),
+    Owner: require('./Owner.js')
+}

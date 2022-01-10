@@ -1,6 +1,6 @@
 const { Schema, model} = require('mongoose')
 
-const CatSchema = new Schema ({
+const Cat = new Schema ({
     name: {
         type: String,
         required: true
@@ -16,10 +16,14 @@ const CatSchema = new Schema ({
     color: {
         type: String,
         required: true
-    }
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'owner',
+        required: true
+      }
 })
 
 
-const Cat = model('cat', CatSchema)
+module.exports = model('cat', Cat)
 
-modules.export = Cat

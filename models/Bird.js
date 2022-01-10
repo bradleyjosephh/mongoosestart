@@ -1,6 +1,6 @@
 const { Schema, model} = require('mongoose')
 
-const BirdSchema = new Schema ({
+const Bird = new Schema ({
     name: {
         type: String,
         required: true
@@ -16,10 +16,13 @@ const BirdSchema = new Schema ({
     sex: {
         type: String,
         required: true
-    }
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'owner',
+        required: true
+      }
 })
 
 
-const Bird = model('bird', BirdSchema)
-
-modules.export = Bird
+module.exports = model('bird', Bird)

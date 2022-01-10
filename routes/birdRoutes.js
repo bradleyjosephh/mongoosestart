@@ -1,20 +1,21 @@
 const router = require('express').Router()
-const { Bird } = require('../models')
+const { Bird, Owner } = require('../models')
 
 // Get all birds
 router.get('/birds', async function (req, res) {
-    const birdData = await Bird.find({})
+    const birdData = await Bird.find({}).populate('owner')
     res.json(birdData)
 })
 
 // Get one bird by id
 router.get('/birds/:id', async function (req, res) {
-    const birdData = await Bird.findById(req.params.id)
+    const birdData = await Bird.findById(req.params.id).populate('owner')
     res.json(birdData)
 })
 // Post one bird
 router.post('/birds', async function (req, res) {
-    const birdData = await Bird.creat(req.body)
+    const birdData = await Bird.create(req.body)
+    await Owner.findByIdAndUpdate(req.body.owner, { $push: { birds: birdData._id } })
     res.json(birdData)
 })
 
@@ -30,4 +31,4 @@ router.delete('/birds/:id', async function (req, res) {
     res.sendStatus(200)
 })
 
-module.export = router
+module.exports = router
