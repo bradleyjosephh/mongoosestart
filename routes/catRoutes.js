@@ -3,8 +3,14 @@ const { Cat, Owner } = require('../models')
 
 // Get all cats
 router.get('/cats', async function (req, res) {
-    const catData = await Cat.find({}).populate('owner')
-    res.json(catData)
+    const catData = await Cat.find({}).populate( {
+        path: 'owner',
+        populate: {
+        path: 'cats',
+        model: 'cat'
+    }
+  })
+res.json(catData)
 })
 
 // Get one cat by id

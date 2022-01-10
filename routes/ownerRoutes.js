@@ -3,13 +3,13 @@ const { Owner } = require('../models')
 
 // GET all Owners
 router.get('/owners', async function (req, res) {
-  const ownerData = await Owner.find({}).populate('cats', 'birds')
+  const ownerData = await Owner.find({}).populate('cat birds')
   res.json(ownerData)
 })
 
 // GET one Owner by id
 router.get('/owners/:id', async function (req, res) {
-  const ownerData = await Owner.findById(req.params.id).populate('cats', 'birds')
+  const ownerData = await Owner.findById(req.params.id).populate('cats birds')
   res.json(ownerData)
 })
 
